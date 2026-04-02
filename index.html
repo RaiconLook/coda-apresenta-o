@@ -199,7 +199,7 @@ tailwind.config = {
 
       <div class="flex flex-col items-center gap-2">
         <div class="font-pixel text-3xl text-mgt animate-pulse">→</div>
-        <span class="font-pixel text-xs text-neon">2 anos</span>
+        <span class="font-pixel text-xs text-neon">5 meses</span>
       </div>
 
       <div class="card pixel-corners p-6 text-center flex-1 border-mgt/30">
@@ -212,7 +212,7 @@ tailwind.config = {
 
     <div class="pixel-corners bg-neon/10 border border-neon/20 p-4 max-w-xl">
       <p class="font-pixel text-sm text-neon">
-        A janela de oportunidade é de <span class="text-white font-bold text-lg">2 anos</span>. Depois disso, todo mundo vai saber. A vantagem é de quem começa agora.
+        A janela de oportunidade é de <span class="text-white font-bold text-lg">5 meses</span>. Depois disso, todo mundo vai saber. A vantagem é de quem começa agora.
       </p>
     </div>
   </div>
@@ -332,37 +332,34 @@ tailwind.config = {
     </h2>
     <p class="text-txt_dim text-lg mb-12 max-w-2xl">Um espaço estilo Gather onde builders se encontram, constroem em público e trocam conhecimento em tempo real.</p>
 
-    <div class="grid md:grid-cols-2 gap-8 items-center">
-      <!-- Imagem do Gather -->
-      <div class="pixel-corners overflow-hidden border border-bg_tertiary">
-        <img src="Escritóriovirtual.png" alt="Escritorio Virtual Coda" class="w-full"/>
+    <!-- Imagem do Gather (full width) -->
+    <div class="pixel-corners overflow-hidden border border-bg_tertiary mb-10">
+      <img src="escritorio-virtual.jpeg" alt="Escritório Virtual Coda" class="w-full"/>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="card pixel-corners p-5">
+        <div class="flex items-center gap-3 mb-2">
+          <span class="font-pixel text-2xl">🏢</span>
+          <h3 class="font-display font-bold text-lg">Building in Public</h3>
+        </div>
+        <p class="text-sm text-txt_dim">Construa projetos ao vivo, veja o que outros membros estão fazendo e colabore em tempo real.</p>
       </div>
 
-      <!-- Features -->
-      <div class="space-y-6">
-        <div class="card pixel-corners p-5">
-          <div class="flex items-center gap-3 mb-2">
-            <span class="font-pixel text-2xl">🏢</span>
-            <h3 class="font-display font-bold text-lg">Building in Public</h3>
-          </div>
-          <p class="text-sm text-txt_dim">Construa projetos ao vivo, veja o que outros membros estao fazendo e colabore em tempo real.</p>
+      <div class="card pixel-corners p-5">
+        <div class="flex items-center gap-3 mb-2">
+          <span class="font-pixel text-2xl">🧠</span>
+          <h3 class="font-display font-bold text-lg">Networking de Alto Nível</h3>
         </div>
+        <p class="text-sm text-txt_dim">Biólogos, desenvolvedores, empresários, estrategistas. Profissionais que pensam diferente reunidos no mesmo espaço.</p>
+      </div>
 
-        <div class="card pixel-corners p-5">
-          <div class="flex items-center gap-3 mb-2">
-            <span class="font-pixel text-2xl">🧠</span>
-            <h3 class="font-display font-bold text-lg">Networking de Alto Nível</h3>
-          </div>
-          <p class="text-sm text-txt_dim">Biólogos, desenvolvedores, empresários, estrategistas. Profissionais que pensam diferente reunidos no mesmo espaço.</p>
+      <div class="card pixel-corners p-5">
+        <div class="flex items-center gap-3 mb-2">
+          <span class="font-pixel text-2xl">🎮</span>
+          <h3 class="font-display font-bold text-lg">Plataforma Própria</h3>
         </div>
-
-        <div class="card pixel-corners p-5">
-          <div class="flex items-center gap-3 mb-2">
-            <span class="font-pixel text-2xl">🎮</span>
-            <h3 class="font-display font-bold text-lg">Plataforma Própria</h3>
-          </div>
-          <p class="text-sm text-txt_dim">A Coda tem seu próprio ecossistema: escritório virtual, chat, salas de reunião, áreas de estudo. Tudo integrado.</p>
-        </div>
+        <p class="text-sm text-txt_dim">A Coda tem seu próprio ecossistema: escritório virtual, chat, salas de reunião, áreas de estudo. Tudo integrado.</p>
       </div>
     </div>
   </div>
@@ -533,7 +530,18 @@ tailwind.config = {
     <!-- Escassez -->
     <div class="pixel-corners bg-mgt/10 border-2 border-mgt/40 p-6 mb-10 max-w-lg mx-auto">
       <p class="font-pixel text-xl text-mgt mb-2">Poucas Vagas Restantes</p>
-      <p class="text-sm text-txt_dim">Quando as vagas de cofundador acabarem, o valor sobe para <span class="text-white font-bold">R$ 1.997</span>. Quem entrar agora garante o preço mais baixo para sempre.</p>
+      <p class="text-sm text-txt_dim">Quando as vagas de cofundador acabarem, o valor sobe para <span class="text-white font-bold">R$ 1.297</span>. Quem entrar agora garante o preço mais baixo para sempre.</p>
+    </div>
+
+    <!-- Destaque final -->
+    <div class="pixel-corners bg-bg_primary border-2 border-mgt p-8 mb-10 max-w-2xl mx-auto text-center" style="box-shadow: 0 0 40px rgba(255,80,0,0.2);">
+      <p class="font-display font-extrabold text-2xl md:text-3xl tracking-tighter mb-3">
+        Entre Agora como <span class="text-mgt">Membro Cofundador</span> e garanta o seu <span class="text-neon">Escritório Virtual Gratuito</span> para revender
+      </p>
+      <div class="inline-flex items-center gap-2 px-4 py-2 bg-red-500/20 border border-red-500/40 pixel-corners mt-3">
+        <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+        <span class="font-pixel text-sm text-red-400 uppercase">Oferta somente para hoje</span>
+      </div>
     </div>
 
     <!-- CTA + QR -->
