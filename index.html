@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Coda — Comunidade de Builders | Pitch Live</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&family=Pixelify+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        mgt: '#ff5000',
+        mgt_dark: '#cc4000',
+        neon: '#c8f55a',
+        neon_dark: '#749e15',
+        bg_primary: '#0e0e0e',
+        bg_secondary: '#1a1a1a',
+        bg_tertiary: '#2a2a2a',
+        txt: '#f5f5f5',
+        txt_dim: '#9ca3af',
+      },
+      fontFamily: {
+        display: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+        body: ['"Inter"', 'sans-serif'],
+        pixel: ['"Pixelify Sans"', 'monospace'],
+        mono: ['"JetBrains Mono"', 'monospace'],
+      },
+    }
+  }
+}
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { background: #0e0e0e; color: #f5f5f5; }
+
+  .pixel-corners {
+    clip-path: polygon(
+      0 4px, 4px 4px, 4px 0,
+      calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
+      100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%,
+      4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px)
+    );
+  }
+
+  .pixel-border {
+    box-shadow: inset 0 4px 0 0 rgba(255,255,255,0.1), inset 0 -4px 0 0 rgba(0,0,0,0.3);
+  }
+
+  .pixel-bg {
+    background-size: 60px 60px;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+  }
+
+  .text-glitch {
+    text-shadow: 2px 0 #00fff7, -2px 0 #ff00c8;
+  }
+  .text-glitch-sm {
+    text-shadow: 1px 0 #00fff7, -1px 0 #ff00c8;
+  }
+
+  .btn-cta {
+    box-shadow: 0 4px 0 0 #cc4000, 0 8px 24px rgba(255,80,0,0.3), inset 0 2px 0 rgba(255,255,255,0.2);
+    transition: all 0.15s;
+  }
+  .btn-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 0 #cc4000, 0 12px 32px rgba(255,80,0,0.4), inset 0 2px 0 rgba(255,255,255,0.2);
+  }
+  .btn-cta:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 0 #cc4000, 0 4px 12px rgba(255,80,0,0.2), inset 0 2px 0 rgba(255,255,255,0.1);
+  }
+
+  .section-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
+    color: #ff5000;
+  }
+  .section-tag::before {
+    content: '';
+    width: 8px; height: 8px;
+    background: #ff5000;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.3); }
+  }
+
+  .card {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .card:hover {
+    border-color: #ff5000;
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px -15px rgba(255,80,0,0.15);
+  }
+
+  .logo-pill {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    transition: all 0.3s;
+  }
+  .logo-pill:hover {
+    border-color: #c8f55a;
+    background: #2a2a2a;
+  }
+
+  .price-strike { text-decoration: line-through; text-decoration-color: #ff5000; text-decoration-thickness: 3px; }
+
+  @keyframes float-up {
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up {
+    opacity: 0;
+    animation: float-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .countdown-num {
+    font-family: "Pixelify Sans", monospace;
+    font-size: 3rem;
+    line-height: 1;
+    color: #ff5000;
+    text-shadow: 0 0 20px rgba(255,80,0,0.5);
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .marquee-track {
+    display: flex;
+    width: 200%;
+    animation: marquee 20s linear infinite;
+  }
+
+  .nav-active { color: #ff5000; }
+</style>
+</head>
+<body class="font-body antialiased overflow-x-hidden">
+
+<!-- ═══ NAV ═══ -->
+<nav class="fixed top-0 left-0 w-full z-50 bg-bg_primary/90 backdrop-blur-md border-b border-bg_tertiary/50">
+  <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <img src="codalogo.png" alt="Coda" class="h-16" style="filter: brightness(0) invert(1);"/>
+    </div>
+    <div class="hidden md:flex items-center gap-6 font-mono text-[10px] uppercase tracking-widest text-txt_dim">
+      <a href="#era" class="hover:text-mgt transition-colors">Era</a>
+      <a href="#provas" class="hover:text-mgt transition-colors">Provas</a>
+      <a href="#stack" class="hover:text-mgt transition-colors">Stack</a>
+      <a href="#escritorio" class="hover:text-mgt transition-colors">Gather</a>
+      <a href="#talentos" class="hover:text-mgt transition-colors">Talentos</a>
+      <a href="#entregas" class="hover:text-mgt transition-colors">Entregas</a>
+      <a href="#oferta" class="hover:text-mgt transition-colors">Oferta</a>
+    </div>
+    <a href="https://pay.cakto.com.br/x9vvzvy" target="_blank" class="pixel-corners pixel-border bg-mgt text-white font-pixel text-xs px-4 py-2 hover:bg-mgt_dark transition-colors">
+      Quero Entrar
+    </a>
+  </div>
+</nav>
+
+<!-- ═══ SLIDE 1: A NOVA ERA ═══ -->
+<section id="era" class="relative min-h-screen flex items-center pt-14 pixel-bg overflow-hidden">
+  <!-- Gradient orbs -->
+  <div class="absolute top-20 left-10 w-96 h-96 bg-mgt/10 rounded-full blur-[120px] pointer-events-none"></div>
+  <div class="absolute bottom-20 right-10 w-80 h-80 bg-neon/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+  <div class="max-w-6xl mx-auto px-6 w-full relative z-10 py-20">
+    <div class="section-tag mb-6">Slide 01 — A Nova Era</div>
+
+    <h1 class="font-display font-extrabold text-[clamp(2.5rem,7vw,5.5rem)] leading-[0.95] tracking-tighter mb-8">
+      <span class="text-glitch">Vibe Coding</span><br/>
+      <span class="text-txt_dim text-[0.55em]">mudou tudo. Você vai ficar olhando?</span>
+    </h1>
+
+    <div class="inline-flex items-center gap-3 px-5 py-2.5 bg-bg_secondary border border-bg_tertiary pixel-corners mb-4">
+      <span class="w-2 h-2 rounded-full bg-mgt animate-pulse"></span>
+      <span class="font-mono text-xs uppercase tracking-widest text-txt_dim">Tema da semana</span>
+      <span class="font-display font-bold text-sm text-white">Claude Code + Obsidian</span>
+      <span class="font-pixel text-xs text-neon">— Seu Segundo Cérebro</span>
+    </div>
+
+    <blockquote class="border-l-4 border-mgt pl-6 mb-10 max-w-2xl">
+      <p class="text-lg text-txt_dim italic leading-relaxed">
+        "Nos próximos 2 anos, quem souber <span class="text-neon font-semibold not-italic">instruir máquinas</span> vai construir o que equipes de 50 pessoas levavam meses para fazer."
+      </p>
+      <cite class="text-sm text-mgt mt-2 block not-italic font-mono">— Naval Ravikant</cite>
+    </blockquote>
+
+    <!-- Transition visual -->
+    <div class="flex flex-col md:flex-row items-center gap-6 mb-12">
+      <div class="card pixel-corners p-6 text-center flex-1">
+        <div class="font-pixel text-4xl mb-3">👨‍💻</div>
+        <p class="font-mono text-xs text-txt_dim uppercase tracking-widest mb-1">Antes</p>
+        <p class="font-display font-bold text-lg">Humano opera<br/>computador</p>
+      </div>
+
+      <div class="flex flex-col items-center gap-2">
+        <div class="font-pixel text-3xl text-mgt animate-pulse">→</div>
+        <span class="font-display font-bold text-sm text-neon">5 meses</span>
+      </div>
+
+      <div class="card pixel-corners p-6 text-center flex-1 border-mgt/30">
+        <div class="font-pixel text-4xl mb-3">🤖</div>
+        <p class="font-mono text-xs text-mgt uppercase tracking-widest mb-1">Agora</p>
+        <p class="font-display font-bold text-lg">Computador opera<br/>computador</p>
+        <p class="text-xs text-neon mt-2 font-mono">Multi-agentes de IA</p>
+      </div>
+    </div>
+
+    <div class="pixel-corners max-w-2xl relative overflow-hidden" style="background: linear-gradient(135deg, rgba(200,245,90,0.08) 0%, rgba(255,80,0,0.12) 100%); border: 1px solid rgba(200,245,90,0.25);">
+      <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-neon via-mgt to-neon opacity-60"></div>
+      <div class="p-6 flex flex-col md:flex-row items-center gap-6">
+        <div class="flex-shrink-0 text-center">
+          <div class="w-24 h-24 rounded-full flex items-center justify-center relative" style="background: radial-gradient(circle, rgba(255,80,0,0.25) 0%, transparent 70%); box-shadow: 0 0 40px rgba(255,80,0,0.2);">
+            <span class="font-display font-extrabold text-5xl text-white" style="text-shadow: 0 0 30px rgba(255,80,0,0.6);">5</span>
+          </div>
+          <p class="font-pixel text-xs text-mgt mt-2 uppercase tracking-widest">meses</p>
+        </div>
+        <div class="flex-1">
+          <p class="font-display font-bold text-lg text-white mb-1">A janela de oportunidade está aberta.</p>
+          <p class="text-sm text-txt_dim leading-relaxed">Depois disso, todo mundo vai saber. A vantagem é de quem <span class="text-neon font-semibold">começa agora</span>.</p>
+        </div>
+        <div class="flex-shrink-0 hidden md:block">
+          <span class="font-pixel text-3xl animate-pulse">⏳</span>
+        </div>
+      </div>
+      <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-mgt via-neon to-mgt opacity-40"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SLIDE 2: OS 3 PILARES ═══ -->
+<section id="provas" class="py-12 relative">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="section-tag mb-6">Slide 02 — O que Você Ganha</div>
+    <h2 class="font-display font-extrabold text-[clamp(2rem,5vw,3.5rem)] tracking-tighter mb-4">
+      Os 3 Pilares da <span class="text-mgt">Coda</span>
+    </h2>
+    <p class="text-txt_dim text-lg mb-12 max-w-2xl">Tudo que você precisa para construir, vender e escalar soluções de IA está dentro da comunidade.</p>
+
+    <div class="grid md:grid-cols-3 gap-6 mb-12">
+      <!-- Conhecimento -->
+      <div class="card pixel-corners pixel-border p-8 text-center">
+        <div class="w-16 h-16 rounded-full bg-mgt/20 flex items-center justify-center mx-auto mb-5">
+          <span class="font-pixel text-3xl">🧠</span>
+        </div>
+        <h3 class="font-display font-bold text-2xl mb-3">Conhecimento</h3>
+        <div class="h-px bg-bg_tertiary my-4"></div>
+        <ul class="text-sm text-txt_dim text-left space-y-3">
+          <li class="flex items-start gap-2"><span class="text-mgt mt-0.5">&#9654;</span> Aulas do zero ao avançado em IA e multiagentes</li>
+          <li class="flex items-start gap-2"><span class="text-mgt mt-0.5">&#9654;</span> Setup completo: Claude Code, Obsidian, N8N, Vercel</li>
+          <li class="flex items-start gap-2"><span class="text-mgt mt-0.5">&#9654;</span> Como precificar e vender projetos de R$ 15k a R$ 60k+</li>
+          <li class="flex items-start gap-2"><span class="text-mgt mt-0.5">&#9654;</span> Projetos reais para portfólio e cases de sucesso</li>
+        </ul>
+      </div>
+
+      <!-- Recurso -->
+      <div class="card pixel-corners pixel-border p-8 text-center border-mgt/30">
+        <div class="w-16 h-16 rounded-full bg-neon/20 flex items-center justify-center mx-auto mb-5">
+          <span class="font-pixel text-3xl">⚡</span>
+        </div>
+        <h3 class="font-display font-bold text-2xl mb-3">Recurso</h3>
+        <div class="h-px bg-bg_tertiary my-4"></div>
+        <ul class="text-sm text-txt_dim text-left space-y-3">
+          <li class="flex items-start gap-2"><span class="text-neon mt-0.5">&#9654;</span> Prompts exclusivos e templates prontos para produzir</li>
+          <li class="flex items-start gap-2"><span class="text-neon mt-0.5">&#9654;</span> One-Shot Prompt: setup automático do ambiente em 1 comando</li>
+          <li class="flex items-start gap-2"><span class="text-neon mt-0.5">&#9654;</span> Stack completa validada em projetos reais (8 ferramentas)</li>
+          <li class="flex items-start gap-2"><span class="text-neon mt-0.5">&#9654;</span> Escritório virtual próprio para trabalhar em equipe</li>
+        </ul>
+      </div>
+
+      <!-- Conexões -->
+      <div class="card pixel-corners pixel-border p-8 text-center">
+        <div class="w-16 h-16 rounded-full bg-mgt/20 flex items-center justify-center mx-auto mb-5">
+          <span class="font-pixel text-3xl">🤝</span>
+        </div>
+        <h3 class="font-display font-bold text-2xl mb-3">Conexões</h3>
+        <div class="h-px bg-bg_tertiary my-4"></div>
+        <ul class="text-sm text-txt_dim text-left space-y-3">
+          <li class="flex items-start gap-2"><span class="text-mgt mt-0.5">&#9654;</span> Networking com devs, empresários e estrategistas</li>
+          <li class="flex items-start gap-2"><span class="text-mgt mt-0.5">&#9654;</span> Banco de talentos: a MGT prospecta, você entrega e fatura</li>
+          <li class="flex items-start gap-2"><span class="text-mgt mt-0.5">&#9654;</span> Building in public: construa ao vivo com outros builders</li>
+          <li class="flex items-start gap-2"><span class="text-mgt mt-0.5">&#9654;</span> Convidados especiais toda sexta-feira</li>
+        </ul>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SLIDE 3: KIT DE SOBREVIVÊNCIA ═══ -->
+<section id="stack" class="py-24 bg-bg_secondary relative">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="section-tag mb-6">Slide 03 — Kit de Sobrevivência</div>
+    <h2 class="font-display font-extrabold text-[clamp(2rem,5vw,3.5rem)] tracking-tighter mb-4">
+      As Armas do Builder
+    </h2>
+    <p class="text-txt_dim text-lg mb-12 max-w-2xl">Ferramentas que dominamos na comunidade. Cada uma é uma peça do quebra-cabeça para construir soluções de alto valor.</p>
+
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12">
+      <div class="logo-pill pixel-corners p-6 text-center">
+        <img src="claudecodelogo.png" alt="Claude Code" class="h-10 mx-auto mb-3 object-contain"/>
+        <p class="font-pixel text-sm text-txt">Claude Code</p>
+        <p class="font-mono text-[10px] text-txt_dim mt-1">Agentes de IA</p>
+      </div>
+      <div class="logo-pill pixel-corners p-6 text-center">
+        <img src="obsidian log.png" alt="Obsidian" class="h-10 mx-auto mb-3 object-contain"/>
+        <p class="font-pixel text-sm text-txt">Obsidian</p>
+        <p class="font-mono text-[10px] text-txt_dim mt-1">Segundo Cérebro</p>
+      </div>
+      <div class="logo-pill pixel-corners p-6 text-center">
+        <img src="antigravity logo.jpeg" alt="Antigravity" class="h-10 mx-auto mb-3 object-contain rounded"/>
+        <p class="font-pixel text-sm text-txt">Antigravity</p>
+        <p class="font-mono text-[10px] text-txt_dim mt-1">AI Workspace</p>
+      </div>
+      <div class="logo-pill pixel-corners p-6 text-center">
+        <div class="text-3xl mb-3">▲</div>
+        <p class="font-pixel text-sm text-txt">Vercel</p>
+        <p class="font-mono text-[10px] text-txt_dim mt-1">Deploy</p>
+      </div>
+      <div class="logo-pill pixel-corners p-6 text-center">
+        <img src="github logo.png" alt="GitHub" class="h-10 mx-auto mb-3 object-contain invert"/>
+        <p class="font-pixel text-sm text-txt">GitHub</p>
+        <p class="font-mono text-[10px] text-txt_dim mt-1">Repositórios</p>
+      </div>
+      <div class="logo-pill pixel-corners p-6 text-center">
+        <div class="text-3xl mb-3">🍌</div>
+        <p class="font-pixel text-sm text-txt">Nano Banana</p>
+        <p class="font-mono text-[10px] text-txt_dim mt-1">Geração de Imagem</p>
+      </div>
+    </div>
+
+    <p class="font-mono text-xs text-txt_dim text-center">Tudo isso ensinado do zero ao avançado, com projetos reais.</p>
+  </div>
+</section>
+
+<!-- ═══ SLIDE 4: O GATHER / ESCRITORIO ═══ -->
+<section id="escritorio" class="py-24 relative overflow-hidden">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="section-tag mb-6">Slide 04 — O Ecossistema</div>
+    <h2 class="font-display font-extrabold text-[clamp(2rem,5vw,3.5rem)] tracking-tighter mb-4">
+      O Escritório Virtual da <span class="text-mgt">Coda</span>
+    </h2>
+    <p class="text-txt_dim text-lg mb-12 max-w-2xl">Um espaço estilo Gather onde builders se encontram, constroem em público e trocam conhecimento em tempo real.</p>
+
+    <!-- Imagem do Gather (full width) -->
+    <div class="pixel-corners overflow-hidden border border-bg_tertiary mb-10">
+      <img src="escritorio-virtual.jpeg" alt="Escritório Virtual Coda" class="w-full"/>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="card pixel-corners p-5">
+        <div class="flex items-center gap-3 mb-2">
+          <span class="font-pixel text-2xl">🏢</span>
+          <h3 class="font-display font-bold text-lg">Building in Public</h3>
+        </div>
+        <p class="text-sm text-txt_dim">Construa projetos ao vivo, veja o que outros membros estão fazendo e colabore em tempo real.</p>
+      </div>
+
+      <div class="card pixel-corners p-5">
+        <div class="flex items-center gap-3 mb-2">
+          <span class="font-pixel text-2xl">🧠</span>
+          <h3 class="font-display font-bold text-lg">Networking de Alto Nível</h3>
+        </div>
+        <p class="text-sm text-txt_dim">Desenvolvedores, empresários e estrategistas. Profissionais que pensam diferente reunidos no mesmo espaço.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SLIDE 5: BANCO DE TALENTOS ═══ -->
+<section id="talentos" class="py-24 bg-bg_secondary relative">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="section-tag mb-6">Slide 05 — A Grande Promessa</div>
+    <h2 class="font-display font-extrabold text-[clamp(2rem,5vw,3.5rem)] tracking-tighter mb-4">
+      Banco de Talentos
+    </h2>
+    <p class="text-txt_dim text-lg mb-12 max-w-2xl">A MGT prospecta e fecha os contratos. Você entrega o serviço e <span class="text-neon font-bold">fatura junto</span>.</p>
+
+    <!-- Flow -->
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="card pixel-corners pixel-border p-8 text-center">
+        <div class="w-16 h-16 rounded-full bg-mgt/20 flex items-center justify-center mx-auto mb-4">
+          <span class="font-pixel text-3xl">🎯</span>
+        </div>
+        <h3 class="font-display font-bold text-lg mb-2">MGT Prospecta</h3>
+        <p class="text-sm text-txt_dim">Nosso time comercial fecha contratos de alto valor. A agenda da semana que vem já está cheia.</p>
+      </div>
+
+      <div class="card pixel-corners pixel-border p-8 text-center">
+        <div class="w-16 h-16 rounded-full bg-neon/20 flex items-center justify-center mx-auto mb-4">
+          <span class="font-pixel text-3xl">🔨</span>
+        </div>
+        <h3 class="font-display font-bold text-lg mb-2">Você Entrega</h3>
+        <p class="text-sm text-txt_dim">Com as habilidades que aprendeu na Coda, voce implementa os projetos de multiagentes para os clientes.</p>
+      </div>
+
+      <div class="card pixel-corners pixel-border p-8 text-center">
+        <div class="w-16 h-16 rounded-full bg-mgt/20 flex items-center justify-center mx-auto mb-4">
+          <span class="font-pixel text-3xl">💰</span>
+        </div>
+        <h3 class="font-display font-bold text-lg mb-2">Fatura Junto</h3>
+        <p class="text-sm text-txt_dim">Quem entrega, fatura. A comunidade é o canal direto entre você e oportunidades reais de mercado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SLIDE 6: ENTREGAVEIS ═══ -->
+<section id="entregas" class="py-24 relative">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="section-tag mb-6">Slide 06 — Entregáveis</div>
+    <h2 class="font-display font-extrabold text-[clamp(2rem,5vw,3.5rem)] tracking-tighter mb-4">
+      O que Você Recebe
+    </h2>
+    <p class="text-txt_dim text-lg mb-12 max-w-2xl">Tudo que um builder precisa para sair do zero e começar a faturar com IA.</p>
+
+    <div class="grid md:grid-cols-2 gap-6 mb-12">
+      <!-- Aulas -->
+      <div class="card pixel-corners p-8">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="font-pixel text-2xl">🎓</span>
+          <h3 class="font-display font-bold text-xl">Aulas do Zero ao Avancado</h3>
+        </div>
+        <ul class="space-y-3 text-sm text-txt_dim">
+          <li class="flex items-start gap-2"><span class="text-mgt mt-0.5">&#9654;</span> Setup completo: Claude Code + Obsidian + GitHub</li>
+          <li class="flex items-start gap-2"><span class="text-mgt mt-0.5">&#9654;</span> Construção de agentes multimodais</li>
+          <li class="flex items-start gap-2"><span class="text-mgt mt-0.5">&#9654;</span> Automações com Vercel + integrações</li>
+          <li class="flex items-start gap-2"><span class="text-mgt mt-0.5">&#9654;</span> Projetos reais para portfólio</li>
+          <li class="flex items-start gap-2"><span class="text-mgt mt-0.5">&#9654;</span> Como precificar e vender soluções de IA</li>
+        </ul>
+      </div>
+
+      <!-- Cronograma -->
+      <div class="card pixel-corners p-8">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="font-pixel text-2xl">📅</span>
+          <h3 class="font-display font-bold text-xl">Cronograma Semanal</h3>
+        </div>
+        <div class="space-y-4">
+          <div class="flex items-center gap-4 p-3 bg-bg_primary pixel-corners">
+            <span class="font-pixel text-mgt text-lg w-8 text-center">S</span>
+            <div>
+              <p class="font-semibold text-sm">Segunda — Briefing</p>
+              <p class="text-xs text-txt_dim">Alinhamento da semana, novos projetos, metas</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 p-3 bg-bg_primary pixel-corners">
+            <span class="font-pixel text-neon text-lg w-8 text-center">Q</span>
+            <div>
+              <p class="font-semibold text-sm">Quarta — Atualizacoes</p>
+              <p class="text-xs text-txt_dim">Progresso dos projetos, tira-dúvidas, code review</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 p-3 bg-bg_primary pixel-corners">
+            <span class="font-pixel text-mgt text-lg w-8 text-center">S</span>
+            <div>
+              <p class="font-semibold text-sm">Sexta — Convidados</p>
+              <p class="text-xs text-txt_dim">Especialistas externos, cases reais, networking</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- One-Shot Prompt -->
+      <div class="card pixel-corners p-8 md:col-span-2 border-neon/20">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="font-pixel text-2xl">⚡</span>
+          <h3 class="font-display font-bold text-xl">One-Shot Prompt <span class="text-neon">(Exclusivo)</span></h3>
+        </div>
+        <p class="text-txt_dim mb-4">Um único prompt no <span class="text-white font-semibold">Claude Code + Obsidian</span> que monta seu <span class="text-white font-semibold">segundo cérebro completo</span> — vault estruturado, templates, integração com IA e workflow automatizado. Você roda 1 comando e tem um sistema de conhecimento profissional pronto.</p>
+        <div class="font-mono text-sm bg-bg_primary p-4 pixel-corners border border-bg_tertiary text-center">
+          <span class="text-txt_dim">🔒</span> <span class="text-mgt font-bold">Conteúdo exclusivo para membros da Coda</span>
+        </div>
+
+        <!-- Valor do escritório virtual -->
+        <div class="grid md:grid-cols-2 gap-4 mt-6">
+          <div class="pixel-corners bg-mgt/10 border border-mgt/20 p-5 text-center">
+            <p class="font-mono text-xs uppercase tracking-widest text-txt_dim mb-2">Valor de implementação</p>
+            <p class="font-display font-extrabold text-5xl text-mgt tracking-tighter">R$ 15.000</p>
+            <p class="text-xs text-txt_dim mt-2">É o que a MGT cobra para construir um escritório virtual do zero para um cliente</p>
+          </div>
+          <div class="pixel-corners bg-neon/10 border border-neon/20 p-5 text-center">
+            <p class="font-mono text-xs uppercase tracking-widest text-txt_dim mb-2">Recorrência mensal</p>
+            <p class="font-display font-extrabold text-5xl text-neon tracking-tighter">R$ 2-3k<span class="text-2xl text-txt_dim">/mes</span></p>
+            <p class="text-xs text-txt_dim mt-2">Manutenção, tokens de IA e suporte — receita recorrente para você</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SLIDE 7: OFERTA ═══ -->
+<section id="oferta" class="py-24 bg-bg_secondary relative overflow-hidden">
+  <!-- Background glow -->
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-mgt/10 rounded-full blur-[150px] pointer-events-none"></div>
+
+  <div class="max-w-4xl mx-auto px-6 relative z-10 text-center">
+    <div class="section-tag justify-center mb-6">Slide 07 — Oferta de Membro Cofundador</div>
+
+    <h2 class="font-display font-extrabold text-[clamp(2rem,5vw,3.5rem)] tracking-tighter mb-2">
+      Entre Agora como <span class="text-mgt">Membro Cofundador</span>
+    </h2>
+    <p class="font-display font-semibold text-xl md:text-2xl text-txt_dim tracking-tight mb-4">
+      e garanta o seu <span class="text-neon font-bold">Escritório Virtual Gratuito</span> para revender
+    </p>
+    <div class="inline-flex items-center gap-2 px-4 py-2 bg-red-500/20 border border-red-500/40 pixel-corners mb-8">
+      <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+      <span class="font-pixel text-sm text-red-400 uppercase">Oferta somente para hoje</span>
+    </div>
+
+    <!-- Ancoragem -->
+    <div class="flex flex-col md:flex-row items-center justify-center gap-8 mb-10">
+      <div class="text-center">
+        <p class="font-mono text-xs uppercase tracking-widest text-txt_dim mb-2">Se fosse cobrar pelo valor real</p>
+        <p class="font-pixel text-4xl text-txt_dim price-strike">R$ 14.000</p>
+      </div>
+
+      <div class="font-pixel text-4xl text-mgt hidden md:block">→</div>
+      <div class="font-pixel text-4xl text-mgt md:hidden">↓</div>
+
+      <div class="text-center">
+        <p class="font-mono text-xs uppercase tracking-widest text-neon mb-2">Membro cofundador — hoje</p>
+        <p class="font-pixel text-6xl text-white" style="text-shadow: 0 0 40px rgba(255,80,0,0.5);">R$ 997</p>
+        <p class="font-mono text-xs text-txt_dim mt-2">ou 12x de R$ 99,70</p>
+      </div>
+    </div>
+
+    <!-- Escassez -->
+    <div class="pixel-corners bg-mgt/10 border-2 border-mgt/40 p-6 mb-10 max-w-lg mx-auto text-center">
+      <p class="font-display font-extrabold text-5xl text-mgt mb-2">8</p>
+      <p class="font-pixel text-xl text-mgt mb-2">vagas restantes para cofundador</p>
+      <p class="text-sm text-txt_dim">Quando acabarem, o valor sobe para <span class="text-white font-bold">R$ 1.297</span>. Quem entrar agora garante o preço mais baixo para sempre.</p>
+    </div>
+
+    <!-- CTA + QR -->
+    <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+      <a href="https://pay.cakto.com.br/x9vvzvy" target="_blank" class="btn-cta pixel-corners bg-mgt text-white font-pixel text-xl px-12 py-5 inline-block">
+        Quero Ser Cofundador
+      </a>
+
+      <div class="text-center">
+        <div class="pixel-corners bg-white p-2 inline-block mb-2">
+          <img src="qrcode-coda.png" alt="QR Code Coda" class="w-36 h-36"/>
+        </div>
+        <p class="font-mono text-[10px] text-txt_dim uppercase tracking-widest">Escaneie para entrar</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="py-8 border-t border-bg_tertiary">
+  <div class="max-w-6xl mx-auto px-6 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <img src="codalogo.png" alt="Coda" class="h-8" style="filter: brightness(0) invert(1); opacity: 0.6;"/>
+      <span class="font-mono text-xs text-txt_dim">Comunidade de Builders</span>
+    </div>
+    <span class="font-mono text-[10px] text-txt_dim uppercase tracking-widest">MGT &copy; 2026</span>
+  </div>
+</footer>
+
+</body>
+</html>
